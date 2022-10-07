@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <children>
+        <VBox>
+            <children>
+                <Label style="-fx-font-size: 28;" text="Teachers"/>
+                <TableView fx:id="teacherTableView">
+                    <columns>
+                        <TableColumn text="First name" minWidth="150">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="firstName"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Last name" minWidth="220">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="lastName"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Email" minWidth="250">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="email"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Salary" minWidth="200">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="salary"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <HBox spacing="10.0">
+                    <children>
+                        <Button text="Add teacher"/>
+                        <Button text="Edit teacher"/>
+                        <Button text="Delete teacher"/>
+                    </children>
+                    <padding>
+                        <Insets top="20.0"/>
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

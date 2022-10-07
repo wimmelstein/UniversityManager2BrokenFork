@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" minWidth="250" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <children>
+        <TextField promptText="First name" fx:id="firstNameField"/>
+        <TextField promptText="Last name" fx:id="lastNameField"/>
+        <TextField promptText="E-mail" fx:id="emailField"/>
+        <ComboBox promptText="Group" fx:id="groupComboBox"/>
+        <HBox spacing="10">
+            <children>
+                <Button text="Add student" onAction="#onAddClick"/>
+                <Button text="Cancel" onAction="#onCancelClick"/>
+            </children>
+        </HBox>
+    </children>
+</VBox>

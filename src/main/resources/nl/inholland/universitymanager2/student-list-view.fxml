@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <children>
+        <VBox>
+            <children>
+                <Label style="-fx-font-size: 28;" text="Students"/>
+                <TableView fx:id="studentTableView">
+                    <columns>
+                        <TableColumn text="First name" minWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="firstName"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Last name" minWidth="100">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="lastName"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Email" minWidth="180">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="email"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Group" minWidth="50">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="group"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Coach" minWidth="150" fx:id="coachColumn">
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <HBox spacing="10.0">
+                    <children>
+                        <Button text="Add student" onAction="#onAddStudentClick"/>
+                        <Button text="Edit student"/>
+                        <Button text="Delete student"/>
+                    </children>
+                    <padding>
+                        <Insets top="20.0"/>
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label style="-fx-font-size: 28;" text="Grades"/>
+                <TableView fx:id="gradeTableView">
+                    <columns>
+                        <TableColumn text="Course" minWidth="150">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="course"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Grade">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="grade"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <HBox spacing="10.0">
+                    <children>
+                        <Button text="Add grade" onAction="#onAddGradeClick"/>
+                        <Button text="Edit grade"/>
+                        <Button text="Delete grade"/>
+                    </children>
+                    <padding>
+                        <Insets top="20.0"/>
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>
