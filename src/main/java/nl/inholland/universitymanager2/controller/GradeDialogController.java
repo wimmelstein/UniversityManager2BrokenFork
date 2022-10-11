@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.inholland.universitymanager2.model.Grade;
-import nl.inholland.universitymanager2.model.Group;
-import nl.inholland.universitymanager2.model.Student;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +19,12 @@ public class GradeDialogController implements Initializable {
     @FXML
     TextField gradeField;
 
+    private Grade grade;
+
+    public Grade getGrade() {
+        return grade;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -32,6 +36,7 @@ public class GradeDialogController implements Initializable {
     }
 
     public void onAddClick(ActionEvent event) {
+        grade = new Grade(courseField.getText(), Double.parseDouble(gradeField.getText()));
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();
     }

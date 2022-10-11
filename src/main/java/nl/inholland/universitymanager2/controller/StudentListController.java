@@ -1,8 +1,6 @@
 package nl.inholland.universitymanager2.controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,16 +23,16 @@ import java.util.ResourceBundle;
 
 public class StudentListController implements Initializable {
 
+    private final Database database;
     @FXML
-    TableView studentTableView;
-    @FXML
-    TableView gradeTableView;
+    TableView<Student> studentTableView;
     @FXML
     TableColumn<Student, String> coachColumn;
-
-    private Database database;
+    @FXML
+    TableView<Grade> gradeTableView;
     private ObservableList<Student> students;
     private Student selectedStudent;
+    private ObservableList<Grade> studentGrades;
 
     public StudentListController(Database database) {
         this.database = database;
@@ -44,8 +42,17 @@ public class StudentListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         students = FXCollections.observableArrayList(database.getStudents());
+        coachColumn.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getGroup().getCoach().getFullName()));
 
         studentTableView.setItems(students);
+        studentTableView
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observableValue, oldStudent, newStudent) -> {
+                    selectedStudent = newStudent;
+                    studentGrades = FXCollections.observableArrayList(newStudent.getGrades());
+                    gradeTableView.setItems(studentGrades);
+                });
     }
 
     public void onAddStudentClick(ActionEvent event) {
@@ -71,15 +78,23 @@ public class StudentListController implements Initializable {
 
     public void onAddGradeClick(ActionEvent event) {
         try {
+
             FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("grade-dialog-view.fxml"));
             GradeDialogController gradeDialogController = new GradeDialogController();
             fxmlLoader.setController(gradeDialogController);
             Scene scene = new Scene(fxmlLoader.load());
 
             Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setScene(scene);
             dialog.setTitle("Add grade");
-            dialog.show();
+            dialog.showAndWait();
+            if (gradeDialogController.getGrade() != null) {
+                Grade grade = gradeDialogController.getGrade();
+                studentGrades.add(grade);
+                selectedStudent.getGrades().add(grade);
+            }
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);

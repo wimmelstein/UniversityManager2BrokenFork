@@ -34,4 +34,8 @@ public abstract class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getFullName() {
+        return String.format("%s %s", firstName, lastName);
+    }
 }
