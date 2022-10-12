@@ -1,6 +1,7 @@
 module nl.inholland.universitymanager2 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.logging;
 
 
     opens nl.inholland.universitymanager2 to javafx.fxml;

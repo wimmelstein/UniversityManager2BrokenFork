@@ -3,7 +3,6 @@ package nl.inholland.universitymanager2.controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,10 +15,13 @@ import nl.inholland.universitymanager2.Application;
 import nl.inholland.universitymanager2.data.Database;
 import nl.inholland.universitymanager2.model.Grade;
 import nl.inholland.universitymanager2.model.Student;
+import nl.inholland.universitymanager2.ui.SceneFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StudentListController implements Initializable {
 
@@ -32,6 +34,8 @@ public class StudentListController implements Initializable {
     TableView<Grade> gradeTableView;
     private ObservableList<Student> students;
     private ObservableList<Grade> studentGrades;
+
+    public static final Logger LOGGER = Logger.getLogger(StudentListController.class.getName());
 
     public StudentListController(Database database) {
         this.database = database;
@@ -57,7 +61,7 @@ public class StudentListController implements Initializable {
                 });
     }
 
-    public void onAddStudentClick(ActionEvent event) {
+    public void onAddStudentClick() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("student-dialog-view.fxml"));
             StudentDialogController studentDialogController = new StudentDialogController(database);
@@ -72,19 +76,15 @@ public class StudentListController implements Initializable {
             if (studentDialogController.getStudent() != null) {
                 students.add(studentDialogController.getStudent());
             }
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, "Something went wrong loading the view");
         }
     }
 
-    public void onAddGradeClick(ActionEvent event) {
+    public void onAddGradeClick() {
         try {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("grade-dialog-view.fxml"));
             GradeDialogController gradeDialogController = new GradeDialogController();
-            fxmlLoader.setController(gradeDialogController);
-            Scene scene = new Scene(fxmlLoader.load());
+            Scene scene = SceneFactory.initScene("grade-dialog-view.fxml", gradeDialogController);
 
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
@@ -95,10 +95,8 @@ public class StudentListController implements Initializable {
                 Grade grade = gradeDialogController.getGrade();
                 studentGrades.add(grade);
             }
-
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, "Something went wrong loading the view");
         }
     }
 }
