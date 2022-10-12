@@ -55,6 +55,7 @@ public class StudentListController implements Initializable {
                     /*
                      * Don't use observableArrayList. onservableList updates the underlying list
                      * where observableArrayList does not.
+                     * See https://stackoverflow.com/questions/32907813/observablelist-doesnt-update-arraylist
                      *  */
                     studentGrades = FXCollections.observableList(newStudent.getGrades());
                     gradeTableView.setItems(studentGrades);
