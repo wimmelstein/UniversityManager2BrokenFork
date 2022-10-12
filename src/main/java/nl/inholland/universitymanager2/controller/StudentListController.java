@@ -53,7 +53,7 @@ public class StudentListController implements Initializable {
                 .selectedItemProperty()
                 .addListener((observableValue, oldStudent, newStudent) -> {
                     /*
-                     * Don't use observableArrayList. onservableList updates the underlying list
+                     * Don't use observableArrayList. observableList updates the underlying list
                      * where observableArrayList does not.
                      * See https://stackoverflow.com/questions/32907813/observablelist-doesnt-update-arraylist
                      *  */
