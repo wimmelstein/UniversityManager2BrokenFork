@@ -31,7 +31,6 @@ public class StudentListController implements Initializable {
     @FXML
     TableView<Grade> gradeTableView;
     private ObservableList<Student> students;
-    private Student selectedStudent;
     private ObservableList<Grade> studentGrades;
 
     public StudentListController(Database database) {
@@ -49,8 +48,11 @@ public class StudentListController implements Initializable {
                 .getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observableValue, oldStudent, newStudent) -> {
-                    selectedStudent = newStudent;
-                    studentGrades = FXCollections.observableArrayList(newStudent.getGrades());
+                    /*
+                     * Don't use observableArrayList. onservableList updates the underlying list
+                     * where observableArrayList does not.
+                     *  */
+                    studentGrades = FXCollections.observableList(newStudent.getGrades());
                     gradeTableView.setItems(studentGrades);
                 });
     }
@@ -92,7 +94,6 @@ public class StudentListController implements Initializable {
             if (gradeDialogController.getGrade() != null) {
                 Grade grade = gradeDialogController.getGrade();
                 studentGrades.add(grade);
-                selectedStudent.getGrades().add(grade);
             }
 
 
