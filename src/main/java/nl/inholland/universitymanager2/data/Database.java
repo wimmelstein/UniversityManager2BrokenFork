@@ -24,9 +24,9 @@ public class Database {
 
     public Database() {
         // teachers
-        teachers.add(new Teacher("Wim", "Wiltenburg", "willem.wiltenburg@inholland.nl", 500000));
+        Teacher wim = new Teacher("Wim", "Wiltenburg", "willem.wiltenburg@inholland.nl", 500000);
         Teacher niels = new Teacher("Niels", "van der Zwet", "niels.vanDerZwet@inholland.nl", 400000);
-        teachers.add(niels);
+        teachers.addAll(List.of(wim, niels));
 
 
         // groups
@@ -34,15 +34,20 @@ public class Database {
         inf2a.setCoach(niels);
         groups.add(inf2a);
 
+        Group inf2b = new Group("INF2B");
+        inf2b.setCoach(wim);
+        groups.add(inf2b);
 
         // students
         Student piet = new Student("Piet", "de Vries", "121231@student.inholland.nl", inf2a);
         piet.getGrades().add(new Grade("Java Fundamentals", 10));
+        piet.setGroup(inf2b);
         students.add(piet);
 
         // students
         Student maartje = new Student("Maartje", "Hendriks", "122341@student.inholland.nl", inf2a);
         maartje.getGrades().add(new Grade("Wiskunde", 8));
+        maartje.setGroup(inf2b);
         students.add(maartje);
     }
 }
