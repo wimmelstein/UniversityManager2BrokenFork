@@ -33,11 +33,12 @@ public class MainController implements Initializable {
         }
     }
 
-    public void OnStudentButtonClick(ActionEvent event) {
+    public void onStudentButtonClick(ActionEvent event) {
+        event.consume();
         loadScene("student-list-view.fxml", new StudentListController(database));
     }
 
-    public void OnTeacherButtonClick(ActionEvent event) {
+    public void onTeacherButtonClick(ActionEvent event) {
         loadScene("teacher-list-view.fxml", new TeacherListController(database));
     }
 

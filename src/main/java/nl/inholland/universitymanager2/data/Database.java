@@ -1,6 +1,11 @@
 package nl.inholland.universitymanager2.data;
 
-import nl.inholland.universitymanager2.model.*;
+import nl.inholland.universitymanager2.annotations.WimMadeThis;
+import nl.inholland.universitymanager2.model.Grade;
+import nl.inholland.universitymanager2.model.Group;
+import nl.inholland.universitymanager2.model.Student;
+import nl.inholland.universitymanager2.model.Teacher;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +39,7 @@ public class Database {
         inf2a.setCoach(niels);
         groups.add(inf2a);
 
+        @WimMadeThis
         Group inf2b = new Group("INF2B");
         inf2b.setCoach(wim);
         groups.add(inf2b);
@@ -47,7 +53,7 @@ public class Database {
         // students
         Student maartje = new Student("Maartje", "Hendriks", "122341@student.inholland.nl", inf2a);
         maartje.getGrades().add(new Grade("Wiskunde", 8));
-        maartje.setGroup(inf2b);
+        maartje.setGroup(inf2a);
         students.add(maartje);
     }
 }

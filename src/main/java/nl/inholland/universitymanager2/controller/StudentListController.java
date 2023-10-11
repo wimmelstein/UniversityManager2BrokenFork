@@ -44,7 +44,7 @@ public class StudentListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        students = FXCollections.observableArrayList(database.getStudents());
+        students = FXCollections.observableList(database.getStudents());
         coachColumn.setCellValueFactory(s -> new SimpleStringProperty(s.getValue().getGroup().getCoach().getFullName()));
 
         studentTableView.setItems(students);
